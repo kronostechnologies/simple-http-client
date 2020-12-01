@@ -29,7 +29,7 @@ func main() {
 	}
 
 	client := &http.Client{
-		Timeout: 5 * time.Second,
+		Timeout: 90 * time.Second,
 	}
 
 	response, ce := client.Do(request)
