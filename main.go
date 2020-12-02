@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 	"time"
 )
 
@@ -28,8 +29,20 @@ func main() {
 		log.Panicln(re)
 	}
 
+	ti, lu := os.LookupEnv("HTTP_TIMEOUT")
+	if lu {
+		log.Panicln(lu)
+	}
+
+	timeout, cv := strconv.Atoi(ti)
+	if cv != nil {
+		log.Panicln(cv)
+	} else {
+		timeout = 90
+	}
+
 	client := &http.Client{
-		Timeout: 90 * time.Second,
+		Timeout: time.Duration(timeout) * time.Second,
 	}
 
 	response, ce := client.Do(request)
