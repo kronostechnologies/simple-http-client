@@ -29,16 +29,11 @@ func main() {
 		log.Panicln(re)
 	}
 
+	var timeout int
 	ti, lu := os.LookupEnv("HTTP_TIMEOUT")
-	if lu {
-		log.Panicln(lu)
-	}
-
 	timeout, cv := strconv.Atoi(ti)
-	if cv != nil {
-		log.Panicln(cv)
-	} else {
-		timeout = 90
+	if cv != nil || !lu {
+		timeout = 5
 	}
 
 	client := &http.Client{
