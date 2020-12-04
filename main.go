@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 	"time"
 )
 
@@ -28,8 +29,16 @@ func main() {
 		log.Panicln(re)
 	}
 
+	ti, lu := os.LookupEnv("HTTP_TIMEOUT")
+	timeout, cv := strconv.Atoi(ti)
+	if cv != nil {
+		log.Panicln("HTTP_TIMEOUT set but not Integer")
+	} else if !lu && timeout == 0 {
+		timeout = 5
+	}
+
 	client := &http.Client{
-		Timeout: 5 * time.Second,
+		Timeout: time.Duration(timeout) * time.Second,
 	}
 
 	response, ce := client.Do(request)
