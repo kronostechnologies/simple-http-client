@@ -33,7 +33,7 @@ func main() {
 	timeout, cv := strconv.Atoi(ti)
 	if cv != nil {
 		log.Panicln("HTTP_TIMEOUT set but not Integer")
-	} else {
+	} else if timeout == 0 {
 		timeout = 5
 	}
 
