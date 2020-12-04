@@ -29,11 +29,11 @@ func main() {
 		log.Panicln(re)
 	}
 
-	ti, _ := os.LookupEnv("HTTP_TIMEOUT")
+	ti, lu := os.LookupEnv("HTTP_TIMEOUT")
 	timeout, cv := strconv.Atoi(ti)
 	if cv != nil {
 		log.Panicln("HTTP_TIMEOUT set but not Integer")
-	} else if timeout == 0 {
+	} else if !lu && timeout == 0 {
 		timeout = 5
 	}
 
