@@ -19,6 +19,7 @@ func main() {
 	method := os.Args[1]
 	url := os.Args[2]
 	var body string
+	timeout := 5
 
 	if len(os.Args) == 4 {
 		body = os.Args[3]
@@ -29,12 +30,12 @@ func main() {
 		log.Panicln(re)
 	}
 
-	ti, lu := os.LookupEnv("HTTP_TIMEOUT")
-	timeout, cv := strconv.Atoi(ti)
-	if cv != nil {
-		log.Panicln("HTTP_TIMEOUT set but not Integer")
-	} else if !lu && timeout == 0 {
-		timeout = 5
+	if et, lu := os.LookupEnv("HTTP_TIMEOUT"); lu {
+		if it, ce := strconv.Atoi(et); ce == nil {
+			timeout = it
+		} else {
+			log.Panicf("HTTP_TIMEOUT invalid: %s\n", et)
+		}
 	}
 
 	client := &http.Client{
