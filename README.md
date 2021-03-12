@@ -1,7 +1,7 @@
 simple-http-client
 ==================
 
-<2MB Docker image to use when you just want to run an http request.
+<5MB Docker image to use when you just want to run an http request.
 
 ### Usage
 ```

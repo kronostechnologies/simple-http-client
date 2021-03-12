@@ -1,8 +1,7 @@
 FROM golang:1.16 AS builder
-RUN apt update ; apt install upx-ucl -y ; apt clean
 WORKDIR /go/src/github.com/kronostechnologies/simple-http-client/
 COPY * ./
-RUN CGO_ENABLED=0 go build -ldflags="-w -s" -o simple-http-client . && upx --best simple-http-client
+RUN CGO_ENABLED=0 go build -ldflags="-w -s" -o simple-http-client .
 RUN echo "nobody:x:65534:65534:nobody:/:" > /tmp/passwd
 
 FROM scratch

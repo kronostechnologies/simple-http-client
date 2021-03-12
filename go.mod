@@ -1,3 +1,3 @@
 module github.com/kronostechnologies/simple-http-client
 
-go 1.15
+go 1.16
