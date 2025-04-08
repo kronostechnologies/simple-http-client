@@ -1,7 +1,5 @@
 FROM --platform=$BUILDPLATFORM golang:1.17 AS builder
 WORKDIR /go/src/github.com/kronostechnologies/simple-http-client/
-COPY go.mod go.sum ./
-RUN go mod download
 COPY . .
 ARG TARGETOS TARGETARCH
 RUN GOOS=$TARGETOS GOARCH=$TARGETARCH CGO_ENABLED=0 go build -ldflags="-w -s" -o simple-http-client .
