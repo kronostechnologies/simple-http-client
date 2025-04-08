@@ -12,7 +12,7 @@ import (
 
 func main() {
 	if len(os.Args) < 3 {
-		fmt.Println("Usage: METHOD URL [BODY]")
+		fmt.Println("Usage: METHOD URL [BODY [CONTENT_TYPE]]")
 		os.Exit(1)
 	}
 
@@ -21,13 +21,24 @@ func main() {
 	var body string
 	timeout := 5
 
-	if len(os.Args) == 4 {
+	var contentType string
+	if len(os.Args) >= 4 {
 		body = os.Args[3]
+
+		if len(os.Args) == 5 {
+			contentType = os.Args[4]
+		} else {
+			contentType = "application/json"
+		}
 	}
 
 	request, re := http.NewRequest(method, url, bytes.NewBufferString(body))
 	if re != nil {
 		log.Panicln(re)
+	}
+
+	if contentType != "" {
+		request.Header.Set("Content-Type", contentType)
 	}
 
 	if et, lu := os.LookupEnv("HTTP_TIMEOUT"); lu {

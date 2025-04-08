@@ -5,7 +5,7 @@ simple-http-client
 
 ### Usage
 ```
-# Usage: METHOD URL [BODY]
+# Usage: METHOD URL [BODY [CONTENT_TYPE]]
 $ simple-http-client POST https://example.com/
 1970/01/01 00:00:00 POST https://example.com/ 200
 ```
