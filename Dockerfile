@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM golang:1.17 AS builder
+FROM golang:1.17 AS builder
 WORKDIR /go/src/github.com/kronostechnologies/simple-http-client/
 COPY . .
 ARG TARGETOS TARGETARCH
